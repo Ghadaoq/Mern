@@ -4,10 +4,7 @@ class PersonCard extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            firstname: this.props.firstname,
-            lastname: this.props.lastname,
             age: this.props.age,
-            haircolor:this.props.haircolor
         }
     }
     incrementAge = () => {
@@ -16,7 +13,8 @@ class PersonCard extends React.Component{
         });
     }
     render(){
-        const { firstname, lastname, age,haircolor } = this.state;
+        const { firstname, lastname,haircolor } = this.props;
+        const { age } = this.state;
         return(
             <div>
                 <h1>My name is { firstname} , { lastname }</h1>
