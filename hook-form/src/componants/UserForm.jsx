@@ -3,10 +3,71 @@ import React, { useState } from  'react';
     
 const UserForm = (props) => {
     const [firstname, setfirstname] = useState("");
+    const [firstnameError, setfirstnameError] = useState("");
     const [lastname, setlastname] = useState("");
+    const [lastnameError, setlastnameError] = useState("");
     const [email, setEmail] = useState("");
+    const [emailError, setemailError] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordError, setpasswordError] = useState("");
     const [confirmpassword, setconfirmpassword] = useState("");
+    const [cpassError, setcpassError] = useState("");
+
+    const handlefirstname = (e) => {
+        setfirstname(e.target.value);
+        if(e.target.value.length < 1) {
+            setfirstnameError("first name is required!");
+        } else if(e.target.value.length < 2) {
+            setfirstnameError("first name must be 2 characters or longer!");
+        }
+        else{
+            setfirstnameError("")
+        }
+    }
+    const handlelastname = (e) => {
+        setlastname(e.target.value);
+        if(e.target.value.length < 1) {
+            setlastnameError("last name is required!");
+        } else if(e.target.value.length < 2) {
+            setlastnameError("last name must be 2 characters or longer!");
+        }
+        else{
+            setlastnameError("")
+        }
+    }
+    const handleemail = (e) => {
+        setEmail(e.target.value);
+        if(e.target.value.length < 1) {
+            setemailError("emailis required!");
+        } else if(e.target.value.length < 5) {
+            setemailError("email be 5 characters or longer!");
+        }
+        else{
+            setemailError("")
+        }
+    }
+    const handlepassword = (e) => {
+        setPassword(e.target.value);
+        if(e.target.value.length < 1) {
+            setpasswordError("password is required!");
+        } else if(e.target.value.length < 8) {
+            setpasswordError("password  be 8 characters or longer!");
+        }
+        else{
+            setpasswordError("")
+        }
+    }
+    const handlecpassword = (e) => {
+        setconfirmpassword(e.target.value);
+        if(e.target.value.length < 1) {
+            setcpassError("password is required!");
+        } else if(e.target.value !== password) {
+            setcpassError("password should match");
+        }
+        else if (e.target.value === password){
+            setcpassError("")
+        }
+    }
     
     const createUser = (e) => {
         e.preventDefault();
@@ -17,26 +78,51 @@ const UserForm = (props) => {
     return(
         <form onSubmit={ createUser }>
             <div>
-                <label>Firstname: </label> 
-                <input type="text" onChange={ (e) => setfirstname(e.target.value) } />
-            </div>
+                <label>firstname: </label>
+                <input type="text" onChange={ handlefirstname } />
+                {
+                    firstnameError ?
+                    <p style={{color:'red'}}>{ firstnameError }</p> :
+                    ''
+                }
+            </div>
             <div>
-                <label>Lastname: </label> 
-                <input type="text" onChange={ (e) => setlastname(e.target.value) } />
-            </div>
-            <div>
-                <label>Email Address: </label> 
-                <input type="text" onChange={ (e) => setEmail(e.target.value) } />
+                <label>last name: </label>
+                <input type="text" onChange={ handlelastname } />
+                {
+                    lastnameError ?
+                    <p style={{color:'red'}}>{ lastnameError }</p> :
+                    ''
+                }
             </div>
-            <div>
-                <label>Password: </label>
-                <input type="text" onChange={ (e) => setPassword(e.target.value) } />
+            <div>
+                <label>Email: </label>
+                <input type="text" onChange={ handleemail } />
+                {
+                    emailError ?
+                    <p style={{color:'red'}}>{ emailError }</p> :
+                    ''
+                }
             </div>
-                <div>
-                <label> ConfirmPassword: </label>
-                <input type="text" onChange={ (e) => setconfirmpassword(e.target.value) } />
+            <div>
+                <label>Password : </label>
+                <input type="text" onChange={ handlepassword } />
+                {
+                    passwordError?
+                    <p style={{color:'red'}}>{ passwordError }</p> :
+                    ''
+                }
             </div>
-                        <input type="submit" value="Create User" />
+            <div>
+                <label>Confrim password: </label>
+                <input type="text" onChange={ handlecpassword } />
+                {
+                    cpassError ?
+                    <p style={{color:'red'}}>{ cpassError }</p> :
+                    ''
+                }
+            </div>
+            <input type="submit" value="Create User" />
             <div>
                 <h1> your form data </h1>
                 <p> first name : {firstname}</p>
