@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, {useState } from 'react';
+import axios from 'axios';
 
 
 
@@ -6,13 +7,12 @@ const Pokimon = () => {
     const [pokimon, setPokimon] = useState([]);
 
     const clickHandler = () => {
-        fetch('https://pokeapi.co/api/v2/pokemon?limit=807')
-            .then(response => response.json())
-            .then(response => setPokimon(response.results))
+        axios.get('https://pokeapi.co/api/v2/pokemon?limit=807')
+            .then(response => setPokimon(response.data.results))
             .catch(err=>{
                 console.log(err);
             });}
-
+            console.log(pokimon);
     return (
         <>
         <button onClick={clickHandler}>fetch Pokimon</button>
