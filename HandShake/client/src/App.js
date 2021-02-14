@@ -11,7 +11,7 @@ function App() {
         // we need to set up all of our event listeners
         // in the useEffect callback function
         console.log('Is this running?');
-        socket.on('Welcome', data => console.log(data));
+        socket.on("welcome all", data => console.log(data));
     
         // note that we're returning a callback function
     // this ensures that the underlying socket will be closed if App is unmounted
@@ -21,7 +21,8 @@ function App() {
 
     return (
         <div className="App">
-        <h1>Socket Hi abed  </h1>
+        <h1>Socket lol
+            </h1>
         </div>
     );
     }

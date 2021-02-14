@@ -12,7 +12,6 @@ const server = app.listen(8000, () =>
 const io = require('socket.io')(server, { cors: true });
 io.on("connection",socket =>{
     console.log("Nice to meet you. (shake hand)")
-    socket.on("event from client",data=>{
-        socket.emit("welcome all",data)
-    })
+        socket.emit("welcome all","ghada")
+    
 })
